@@ -272,3 +272,172 @@ table.length; // 3
 
 table[i].length; // 4
 */
+
+
+
+// <------------------- Array Approches --------------------->
+
+// <----------------- Two Pointer --------------------->
+/* 
+The Two Pointer Technique is an efficient method used in arrays and strings where two indices (pointers) move through the data structure to solve problems in linear time O(n).
+
+When to Use Two Pointers
+
+Use it when:
+
+Array is sorted
+Need to find:
+pairs
+subarrays
+duplicates
+reversed elements
+Want to reduce nested loops from O(n^2) to O(n)
+*/
+
+/* 
+//code
+public class Array{
+    public static int[] twoSum(int arr[] , int target){
+        int p1=0;
+        int p2=arr.length-1;
+        while(p1<p2){
+          if((arr[p1]+arr[p2])==target){
+            return new int[]{p1,p2};
+          }else if((arr[p1]+arr[p2])>target){
+            p2--;
+          }else{
+            p1++;
+          }
+        }
+        return new int []{-1,-1};
+      
+    }
+    public static void main(String [] args){
+        int arr[]={1,2,4,6,10};
+        int target= 10;
+        int res[] = twoSum(arr, target);
+        
+        for (int i = 0; i < res.length; i++) {
+            System.out.print(res[i]+" ");
+        }
+    }
+}
+*/
+
+// <--------------------- Sliding Window---------------------->
+
+/* 
+Sliding Window is an optimized technique used to solve subarray / substring problems 
+efficiently by maintaining a “window” instead of recalculating results again and again.
+
+Core Idea
+
+Instead of recalculating every subarray:
+
+Brute force → O(n²)
+
+We maintain a window and update it:
+
+Algorithm Steps
+1.Calculate the sum of the first window of size k.
+2.Store it as the current result.
+3.Move the window one position at a time:
+*Remove the element leaving the window.
+*Add the new element entering the window.
+4.Update the answer if needed.
+
+Sliding Window → O(n)
+📌 Types of Sliding Window
+1. Fixed Size Window
+2. Variable Size Window
+
+Use it when you see:
+Subarray or substring problems
+Continuous sequence
+Maximum / minimum / sum / average
+Longest or shortest window problems
+
+*/
+
+/* 
+// find maxsum using Sliding window 
+public class Array{
+    public static int slidingWindow(int arr[] , int k){
+        // base case 
+        if(arr.length<k || k<=0){
+            System.out.println("Invalid window size.");
+            return -1;
+        }
+
+        int maxSum = 0;
+        int sum=0;
+        for (int i = 0; i<k; i++) {
+            sum+=arr[i];
+        }     
+        maxSum=sum;   
+        for (int i =k ; i < arr.length; i++) {
+            sum=sum+arr[i]-arr[i-k];
+            maxSum = Math.max(maxSum, sum);
+        }
+        
+        return maxSum;
+    }
+    public static void main(String[] args){
+        int arr[]= {-1,2,1,-3,1};
+        int arr1[]={2,-2,1,-1,-6,7};
+        System.out.println(slidingWindow(arr,2));
+        System.out.println(slidingWindow(arr1,3));
+    }
+}
+*/
+
+// <----------------------- Kadane's Algorithm --------------------------->
+
+/* 
+Kadane's Algorithm is used to find the maximum sum of a contiguous subarray in an array.
+
+Main Idea
+If the current sum becomes negative, it is better to start a new subarray rather than continue with the negative sum.
+
+Algorithm Steps
+1.Initialize:
+currSum = 0;
+maxSum = Integer.MIN_VALUE;
+2.Traverse the array:
+Add the current element to currSum.
+Update maxSum.
+If currSum becomes negative, reset it to
+
+Complexity
+Time Complexity: O(n)
+Space Complexity: O(1)
+*/
+
+/* 
+// Find maxSum subarray Sum using kadane's algorithm
+
+public class Array{
+    public static void kadane_algo(int arr[]){
+        //base case 
+        if(arr.length==1){
+            System.out.println(arr[0]);
+        }
+
+        int maxSum=Integer.MIN_VALUE;
+        int currSum=0;
+        for (int i = 0; i < arr.length; i++) {
+            currSum=Math.max(arr[i],currSum+arr[i]);
+            maxSum=Math.max(maxSum, currSum);
+        }
+
+        System.out.println(maxSum);
+ 
+    }
+    public static void main(String[] args){
+        int arr[]={-1,-2,-5,-6,-3};
+        int arr1[]={2,-2,1,-1,-6,7};
+        kadane_algo(arr);
+        kadane_algo(arr1);
+    }
+}    
+*/

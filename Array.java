@@ -415,7 +415,7 @@ Space Complexity: O(1)
 
 /* 
 // Find maxSum subarray Sum using kadane's algorithm
-
+//code
 public class Array{
     public static void kadane_algo(int arr[]){
         //base case 
@@ -441,3 +441,135 @@ public class Array{
     }
 }    
 */
+
+// <------------------------ Binary Search --------------------------->
+
+/* 
+Binary Search
+
+Definition:
+Binary Search is an efficient searching algorithm used to find an element in a sorted array by repeatedly dividing the search space into two halves.
+
+Main Idea
+Instead of checking every element one by one, Binary Search:
+1.Finds the middle element.
+2.If the target equals the middle element → return it.
+3.If the target is smaller → search the left half.
+4.If the target is larger → search the right half.
+5.Repeat until the element is found or the search space becomes empty.
+
+Complexity
+Algorithm	Time Complexity
+Linear Search	O(n)
+Binary Search	O(log n)
+
+Space Complexity: O(1) (iterative version)
+
+Condition
+✅ Array must be sorted.
+❌ Binary Search does not work correctly on an unsorted array.
+*/
+
+//code
+/* 
+public class Array{
+    public static int binary_Search(int arr[],int key){
+        int left = 0;
+        int right = arr.length-1;
+        while(left<=right){
+            int mid =(left+right)/2;
+            if(arr[mid]==key){
+                return mid;
+            }else if(arr[mid]<key){
+                left =mid+1;
+            }else{
+                right =mid-1;
+            }
+        }
+        return -1;
+    }
+    public static void main(String[] args){
+        int arr[]={2,3,5,6,7,8,9,12};
+        int key = 7;
+        System.out.println(binary_Search(arr,key));
+    }
+}
+    */
+
+// <------------------------ Prefix Based --------------------------->
+
+/* 
+Prefix Sum Approach (Simple Language)
+
+Prefix Sum is a technique where we store the running sum of the array so that we can find any subarray sum quickly.
+Example
+
+Array:
+
+arr = {1, 2, 3, 4, 5}
+
+Create a prefix array:
+
+prefix = {1, 3, 6, 10, 15}
+
+How?
+
+prefix[0] = 1
+prefix[1] = 1 + 2 = 3
+prefix[2] = 1 + 2 + 3 = 6
+prefix[3] = 1 + 2 + 3 + 4 = 10
+prefix[4] = 1 + 2 + 3 + 4 + 5 = 15
+
+Finding Subarray Sum
+
+Suppose we want the sum of:
+
+{2, 3, 4}
+
+(indices 1 to 3)
+
+Instead of adding:
+
+2 + 3 + 4 = 9
+
+we use the prefix array:
+
+sum = prefix[3] - prefix[0]
+    = 10 - 1
+    = 9
+
+Each position stores the sum from index 0 to that position.
+
+Complexity
+Creating prefix array → O(n)
+Finding any subarray sum → O(1)
+So, Prefix Sum is an optimization technique used to answer subarray sum queries faster
+*/
+
+// code
+public class Array{
+    public static void prefixSum(int arr[]){
+
+        int maxsum = Integer.MIN_VALUE;
+        int currSum = 0;
+        int prefix[] = new int [arr.length];
+        prefix[0] = arr[0];
+
+        for (int i = 1; i < prefix.length; i++) {
+            prefix[i] = prefix[i-1]+arr[i];
+        }
+        for (int i = 0; i < arr.length; i++) {
+            for (int j = i; j < arr.length; j++) {
+                currSum = i ==0 ? prefix[j] : prefix[j]-prefix[i-1];
+                if(currSum>maxsum){
+                    maxsum=currSum;
+                }
+            }
+        }
+        System.out.println("MaxSubArraySum is :"+maxsum);
+    }
+    public static void main(String[] args){
+        int arr[]= {2,4,6,8,10};
+        prefixSum(arr);
+    }
+}

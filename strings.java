@@ -103,3 +103,127 @@ A
 A n u r a g   K a s h y a p
 */
 
+// <----------------------- String Concatenate ------------------>
+
+/* 
+public class strings{
+    public static void main(String[] args){
+        String Str = "Anurag";
+        String Str1 = "Kashyap";
+        System.out.println(Str+" "+Str1);
+    }
+}
+*/
+
+// <---------------------------------   Palindrome ----------------------------------->
+/* 
+import java.util.*;
+public class strings{
+    public static Boolean Palindrome(String str){
+        for(int i =0; i<str.length()/2;i++){
+            if(str.charAt(i)!=str.charAt(str.length()-i-1)){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    public static void main(String[] args){
+        Scanner sc = new Scanner(System.in);
+        String str = sc.next();
+        System.out.println("Word is :"+str);
+        System.out.println(Palindrome(str));
+    }
+}
+    */
+
+// <----------------------- String Functions Compare ------------------------>
+/* 
+public class strings{
+    public static void main(String [] args){
+        String s1 = "Tony";
+        String s2 = "Tony";
+        String s3 =new String ("Tony");
+        System.out.println(s1==s2);
+        System.out.print(s1==s3);
+
+    }
+}
+Output:
+true
+false
+*/
+
+/*
+String Pool vs Heap Memory in Java
+String Pool
+String Pool is a special memory area inside the Heap.
+It stores String literals(A String literal is a String value written directly inside double quotes (")) to save memory.
+If the same String literal already exists, Java reuses it instead of creating a new object.
+String s1 = "Tony";
+String s2 = "Tony";
+String Pool
+┌─────────┐
+│ "Tony"  │
+└─────────┘
+   ↑   ↑
+  s1  s2
+Only one "Tony" object is created.
+Both s1 and s2 point to the same object.
+Heap Memory
+Heap is the memory area where objects are stored during runtime.
+Using new always creates a new object in Heap memory.
+String s3 = new String("Tony");
+String Pool           Heap
+┌─────────┐         ┌─────────┐
+│ "Tony"  │         │ "Tony"  │
+└─────────┘         └─────────┘
+     ↑                   ↑
+    s1                  s3
+s3 points to a different object, even though the content is the same.
+Example
+String s1 = "Tony";
+String s2 = "Tony";
+String s3 = new String("Tony");
+
+System.out.println(s1 == s2); // true
+System.out.println(s1 == s3); // false
+System.out.println(s1.equals(s3)); // true
+Output
+true
+false
+true
+*/
+
+// Comparing String Contents Using equals() in Java
+/* 
+public class strings {
+    public static void main(String[] args) {
+
+        // String literals stored in the String Pool.
+        String str = "Tony";
+        String str1 = "Tony";
+
+        // Creates a new String object in Heap memory.
+        String str2 = new String("Tony");
+
+        // equals() compares the actual content of the Strings.
+        System.out.println(str.equals(str1));
+
+        // Even though str1 and str2 are different objects,
+        // their contents are the same, so equals() returns true.
+        System.out.println(str1.equals(str2));
+    }
+}
+Output:
+true
+true
+*/
+
+/*
+Key Notes
+1.equals() compares the contents (characters) of two Strings.
+2.It does not compare memory locations.
+3.If the text inside both Strings is the same, equals() returns true.
+4.Use equals() when you want to check whether two Strings contain the same value.
+*/

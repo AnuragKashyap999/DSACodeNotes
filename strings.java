@@ -227,3 +227,125 @@ Key Notes
 3.If the text inside both Strings is the same, equals() returns true.
 4.Use equals() when you want to check whether two Strings contain the same value.
 */
+
+// <-------------------- String Functions ------------------>
+/* 
+public class strings {
+    public static void main(String[] args) {
+
+        String str = "Hello World";
+
+        // substring(startIndex, endIndex)
+        // Returns characters from startIndex to endIndex-1
+        // Here it returns "Hello"
+        System.out.println(str.substring(0, 5));
+
+        // compareTo()
+        // Compares two strings lexicographically (dictionary order)
+        // Returns:
+        // 0  -> both strings are equal
+        // >0 -> calling string is greater
+        // <0 -> calling string is smaller
+
+        String str1[] = {"Mango", "apple", "Banana"};
+
+        // Assume first string is the largest initially
+        String largest = str1[0];
+
+        // Traverse array to find lexicographically largest string
+        for (int i = 0; i < str1.length; i++) {
+
+            // If current string is greater than 'largest',
+            // update largest
+            //"Kya largest string, str1[i] se chhoti hai?"
+            //Agar haan, to compareTo() negative value return karega aur condition true ho jayegi.
+            if (largest.compareTo(str1[i]) < 0) {
+                largest = str1[i];
+            }
+        }
+
+        System.out.println("Largest String: " + largest);
+    }
+}
+*/
+
+/* 
+key point:
+Output:
+Largest String: apple
+Because compareTo() is case-sensitive and lowercase letters (a) 
+have a higher Unicode value than uppercase letters (M, B), "apple" 
+is considered larger than "Mango" and "Banana".
+*/
+
+// <--------------------------- String Builder -------------------->
+/* 
+String vs StringBuilder in Java
+Feature	String	StringBuilder
+Mutable?	❌ No (Immutable)	✅ Yes (Mutable)
+Memory	New object banta hai modification par	Same object modify hota hai
+Performance	Slow for many modifications	Faster for many modifications
+Thread Safe	✅ Safe (immutable)	❌ Not thread-safe
+Package	java.lang.String	java.lang.StringBuilder
+1. String (Immutable)
+String str = "Hello";
+str = str + " World";
+
+Kya hota hai?
+
+"Hello" object banta hai.
+"Hello World" ke liye naya object banta hai.
+Purana object unchanged rehta hai.
+Hello  ---> old object
+Hello World ---> new object
+
+Isliye baar-baar concatenation costly hoti hai.
+
+2. StringBuilder (Mutable)
+StringBuilder sb = new StringBuilder("Hello");
+sb.append(" World");
+
+Yahan naya object nahi banta.
+
+Existing object me hi data add ho jata hai.
+
+Hello
+   ↓ append
+Hello World
+
+Common StringBuilder Methods
+StringBuilder sb = new StringBuilder("Hello");
+
+sb.append(" World");     // Hello World
+sb.insert(5, ",");       // Hello, World
+sb.delete(5, 6);         // Hello World
+sb.reverse();            // dlroW olleH
+
+System.out.println(sb);
+
+Key Points:
+1.String is immutable, so every modification creates a new object.
+2.StringBuilder is mutable, so modifications happen in the same object and are faster for repeated string operations.
+3.Use String when content rarely changes.
+4.Use StringBuilder when you need frequent concatenation or modifications.
+*/
+
+public class strings {
+    public static void main(String[] args) {
+
+        // Create an empty StringBuilder object
+        StringBuilder sb = new StringBuilder("");
+
+        // Append (add) "Hello" to the StringBuilder
+        sb.append("Hello");
+
+        // Convert StringBuilder to String
+        // Note: The returned String is not stored anywhere,
+        // so this line has no effect on the output.
+        sb.toString();
+
+        // Print the contents of StringBuilder
+        // println() automatically calls toString() internally
+        System.out.println(sb);
+    }
+}
